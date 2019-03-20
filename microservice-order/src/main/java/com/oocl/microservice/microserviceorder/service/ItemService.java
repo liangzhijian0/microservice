@@ -41,7 +41,8 @@ public class ItemService {
         //拿到这个service instance之后就可以调用它里面的方法
         //serviceInstance.getHost();拿到主机名
         //serviceInstance.getPort();拿到端口号
-        String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort();
-        return restTemplate.getForObject(url + "/item/" + id, Item.class);
+//        String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort();
+        return restTemplate.getForObject("http://micro-service-item" + "/item/" + id, Item.class);
     }
+
 }
