@@ -1,4 +1,4 @@
-package com.oocl.microserviceeureka.microserviceeureka;
+package com.oocl.microserviceeureka.microserviceconfig;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

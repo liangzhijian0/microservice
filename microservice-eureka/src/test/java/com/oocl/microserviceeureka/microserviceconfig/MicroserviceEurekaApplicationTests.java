@@ -1,4 +1,4 @@
-package com.oocl.microserviceeureka.microserviceeureka;
+package com.oocl.microserviceeureka.microserviceconfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
