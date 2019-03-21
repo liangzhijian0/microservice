@@ -2,6 +2,8 @@ package com.oocl.microservice.microserviceorder;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -11,8 +13,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * 声明这是一个Eureka的客户端
  */
-@EnableDiscoveryClient
-@SpringBootApplication
+@SpringCloudApplication
 public class MicroserviceOrderApplication {
     //Default use HTTP Client
     //Use OK client

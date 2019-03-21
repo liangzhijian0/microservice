@@ -1,5 +1,7 @@
 package com.oocl.microservice.microserviceorder.service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.ribbon.proxy.annotation.Hystrix;
 import com.oocl.microservice.microserviceorder.pojo.Item;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -30,7 +32,13 @@ public class ItemService {
     @Resource
     private DiscoveryClient discoveryClient;
 
-    Item getItemById(Long id) {
+    @HystrixCommand(fallbackMethod = "fallback")
+    Item getItemById(Long id)  {
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //指定商品微服务的名称,返回服务列表
         List<ServiceInstance> instances = discoveryClient.getInstances("micro-service-item");
         if (null == instances || instances.isEmpty()) {
@@ -43,6 +51,10 @@ public class ItemService {
         //serviceInstance.getPort();拿到端口号
 //        String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort();
         return restTemplate.getForObject("http://micro-service-item" + "/item/" + id, Item.class);
+    }
+
+    public Item fallback(Long id){
+        return new Item(23L,"hystrix","pic","desc",11L);
     }
 
 }
